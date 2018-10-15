@@ -1,0 +1,58 @@
+<ion-content padding>
+
+
+  <ion-card-header text-center>
+    FPS HKQR Receive Payment
+  </ion-card-header>
+
+  <div class="center">
+    <qrcode [qrdata]="QR_value" [usesvg]="true" [colordark]="'#3f0c59'" [level]="'L'"></qrcode>
+  </div>
+
+  <ion-item>
+    <h1 class="amount" *ngIf="hkqrRoot[54] > 0 ">HK{{hkqrRoot[54] | currency}}</h1>
+  </ion-item>
+
+  <!-- <ion-list>
+  <ion-item-sliding>
+    <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/HW.jpg">
+        </ion-avatar>
+        <h2>{{hkqrRoot[26][3]}}</h2>
+        <p>{{hkqrRoot[26][0]}}</p>
+      </ion-item>
+      <pre>{{hkqr | json}}</pre>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/HW.jpg" (click)="presentPrompt()">
+        </ion-avatar>
+        <h2>{{hkqrRoot[26][3]}}</h2>
+        <p>{{hkqrRoot[26][0]}}</p>
+      </ion-item>
+      
+      <ion-item-options side="right">
+        <!-- <button ion-button color="secondary">
+          <ion-icon name="eye-off"></ion-icon>
+          Hide
+        </button> -->
+        <button ion-button color="primary" (click)="presentPrompt()">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    
+  </ion-list>
+
+  <ion-footer padding>
+    <button ion-button full (click)="openNumInput()">Enter amount</button>
+    <ion-list></ion-list>
+  </ion-footer>
+
+</ion-content>

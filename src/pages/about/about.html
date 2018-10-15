@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      EMV QR Code Validation
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+
+  <ion-card>
+    <ion-title padding *ngIf="EMVcode">
+      EMV compliant
+      <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
+    </ion-title>
+
+    <ion-title padding *ngIf="!EMVcode">
+      Unknown QR Code
+    </ion-title>
+
+    <ion-card-content>
+      <ion-item-divider color="light">Raw data</ion-item-divider>
+
+      <ion-list>
+        <ion-item text-wrap>
+          {{ scannedCode }}
+        </ion-item>
+        <ion-item-divider *ngIf="EMVcode" color="light">EMV interpreted data</ion-item-divider>
+        <ion-item *ngIf="EMVcode">
+          <pre>{{QRroot | json}}</pre>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
+<ion-footer padding>
+  <button ion-button full icon-left (click)="scanCode()">
+    <ion-icon name="qr-scanner"></ion-icon>Scan Code
+  </button>
+</ion-footer>

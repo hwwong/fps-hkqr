@@ -1,0 +1,33 @@
+
+
+page-num-input {
+    .button{
+        // font-family: 'Comic Neue', sans-serif;
+        // font-weight: 700;
+        font-size: 2.2em;
+        height: 60px;
+        // line-height: 1.5;
+    }
+
+    .amount-font ion-label{
+        color : #a73500;
+        white-space: inherit;
+        font-size: 25px;
+      }
+    
+}
+
+
+
+ion-modal.custom-popup ion-backdrop {
+    visibility: visible !important;
+    z-index:0;
+}
+ion-modal.custom-popup .modal-wrapper{
+    bottom: 0;
+    width:100%;
+    max-width: 500px;
+    height:60%;
+    position:absolute;
+}
+
