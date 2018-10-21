@@ -6,38 +6,46 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
 
 
 
+<ion-content>
 
-  <ion-card>
-    <ion-title padding *ngIf="EMVcode">
-      EMV compliant
-      <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
-    </ion-title>
+<ion-title padding *ngIf="QRroot">
+  EMV compliant
+  <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
+</ion-title>
 
-    <ion-title padding *ngIf="!EMVcode">
-      Unknown QR Code
-    </ion-title>
+<ion-title padding *ngIf="!QRroot">
+  Unknown QR Code
+</ion-title>
 
-    <ion-card-content>
-      <ion-item-divider color="light">Raw data</ion-item-divider>
+  <ion-item-divider color="light">Raw data</ion-item-divider>
 
-      <ion-list>
-        <ion-item text-wrap>
-          {{ scannedCode }}
-        </ion-item>
-        <ion-item-divider *ngIf="EMVcode" color="light">EMV interpreted data</ion-item-divider>
-        <ion-item *ngIf="EMVcode">
-          <pre>{{QRroot | json}}</pre>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
+  <ion-list>
+    <ion-item text-wrap>
+      {{ scannedCode }}
+    </ion-item>
+    <ion-item-divider *ngIf="QRroot" color="light">EMV interpreted data</ion-item-divider>
+    <ion-item *ngIf="QRroot">
+      <!-- <pre>{{QRroot | json}}</pre> -->
 
-  </ion-card>
+      <ion-item no-padding *ngFor="let x of QRroot">
+        <h2>
+          {{x[1]}}
+        </h2>
+        <h3>
+          {{x[2]}}
+        </h3>
 
+      </ion-item>
+
+
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+
 <ion-footer padding>
   <button ion-button full icon-left (click)="scanCode()">
     <ion-icon name="qr-scanner"></ion-icon>Scan Code

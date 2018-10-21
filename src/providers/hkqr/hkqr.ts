@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { EMV, bankCode } from './data'
 /*
   Generated class for the HkqrProvider provider.
 
@@ -13,26 +13,28 @@ export class HkqrProvider {
   data = {};
 
   constructor() {
+    // var emv =EMV;
     console.log('Hello HkqrProvider Provider');
+    console.log(bankCode);
   }
 
   genQRvalue(val) {
-    var data = Object.assign({}, val);
+    let data = Object.assign({}, val);
     //combine EMV QR template
-    for (var j = 0; j < this.EmvTemplateId.length; j++)
-      for (var i = this.EmvTemplateId[j][0]; i <= this.EmvTemplateId[j][1]; i++)
+    for (let j = 0; j < this.EmvTemplateId.length; j++)
+      for (let i = this.EmvTemplateId[j][0]; i <= this.EmvTemplateId[j][1]; i++)
         if (data[i] != null)
           data[i.toString()] = this.combineQRvalue(data[i.toString()]);
 
-    var str = this.combineQRvalue(data);
+    let str = this.combineQRvalue(data);
     str += "6304" + this.crc16(str + "6304");
     return str;
   }
 
   combineQRvalue(data) {
-    var l = 0;
-    var str = "";
-    for (var id in data) {
+    let l = 0;
+    let str = "";
+    for (let id in data) {
       if (Number(id) < 10) str += 0;
       str += id;
       l = data[id].length;
@@ -53,10 +55,10 @@ export class HkqrProvider {
     this.data = this.parseData(qr);
 
     //Parse EMV QR code template
-    for (var id = 0; id < this.EmvTemplateId.length; id++) {
-      for (var i = this.EmvTemplateId[id][0]; i <= this.EmvTemplateId[id][1]; i++) {
+    for (let id = 0; id < this.EmvTemplateId.length; id++) {
+      for (let i = this.EmvTemplateId[id][0]; i <= this.EmvTemplateId[id][1]; i++) {
         if (typeof this.data[i] !== "undefined") {
-          var str = this.parseData(this.data[i]);
+          let str = this.parseData(this.data[i]);
           if (!str) {
             console.log("ID or length invalid");
             return false;
@@ -65,12 +67,19 @@ export class HkqrProvider {
         }
       }
     }
-    return this.data;
+
+    let arr = [];
+    for (const key in this.data) {
+      console.log(key + EMV[key].name)
+       arr.push([key,EMV[key].name,this.data[key]]);
+    }
+    return arr;
+    // return this.data;
   }
 
   parseData(qr) {
-    var data = {};
-    var id, size, i = 0;
+    let data = {};
+    let id, size, i = 0;
 
     while (i < qr.length) {
       // get ID 
@@ -91,10 +100,10 @@ export class HkqrProvider {
 
   // Checksum
   crc16(data) {
-    var crc = 0xFFFF;
-    for (var c = 0; c < data.length; c++) {
+    let crc = 0xFFFF;
+    for (let c = 0; c < data.length; c++) {
       crc ^= data.charCodeAt(c) << 8;
-      for (var i = 0; i < 8; i++) {
+      for (let i = 0; i < 8; i++) {
         if (crc & 0x8000)
           crc = (crc << 1) ^ 0x1021;
         else
@@ -102,7 +111,7 @@ export class HkqrProvider {
       }
     }
 
-    var ret = (crc & 0xFFFF).toString(16).toUpperCase();
+    let ret = (crc & 0xFFFF).toString(16).toUpperCase();
     ret = ("0").repeat(4 - ret.length) + ret;
     return ret;
   }

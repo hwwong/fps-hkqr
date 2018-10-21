@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   hkqrRoot = {};
   hkqrAccount = {};
-  QR_value = "";
+  QR_value = " ";
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -29,23 +29,22 @@ export class HomePage {
     this.hkqrRoot[59] = "NA";
     this.hkqrRoot[60] = "HK";
 
-
     this.hkqrAccount[0] = "hk.com.hkicl"
     this.hkqrAccount[1] = "004";
-  
+    this.hkqrRoot[26] = this.hkqrAccount;
+
+
     storage.get("mobile").then((val) => {
       this.hkqrAccount[3] = val;
-      // console.log("Mobile:" + val);
+      this.QR_value = this.hkqrProvider.genQRvalue(this.hkqrRoot);
+
     }).catch(err => {
       console.log(err);
       this.hkqrAccount[3] = "+852-1234678"
+      this.QR_value = this.hkqrProvider.genQRvalue(this.hkqrRoot);
     });
 
 
-    this.hkqrRoot[26] = this.hkqrAccount;
-    console.log(this.hkqrRoot);
-
-    this.QR_value = this.hkqrProvider.genQRvalue(this.hkqrRoot);
   }
 
   openNumInput() {
@@ -71,7 +70,7 @@ export class HomePage {
   presentPrompt() {
     let alert = this.alertCtrl.create({
       title: 'FPS Mobile',
-      subTitle:"Format: +852-12345678",
+      subTitle: "Format: +852-12345678",
       inputs: [
         {
           name: 'mobile',
