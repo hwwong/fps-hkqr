@@ -11,14 +11,14 @@
 
 <ion-content>
 
-<ion-title padding *ngIf="QRroot">
-  EMV compliant
-  <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
-</ion-title>
+  <ion-title padding *ngIf="QRroot">
+    EMV compliant
+    <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
+  </ion-title>
 
-<ion-title padding *ngIf="!QRroot">
-  Unknown QR Code
-</ion-title>
+  <ion-title padding *ngIf="!QRroot">
+    Unknown QR Code
+  </ion-title>
 
   <ion-item-divider color="light">Raw data</ion-item-divider>
 
@@ -28,7 +28,6 @@
     </ion-item>
     <ion-item-divider *ngIf="QRroot" color="light">EMV interpreted data</ion-item-divider>
     <ion-item *ngIf="QRroot">
-      <!-- <pre>{{QRroot | json}}</pre> -->
 
       <ion-item no-padding *ngFor="let x of QRroot">
         <h2>
@@ -39,7 +38,7 @@
         </h3>
 
       </ion-item>
-
+      <pre>{{QRroot | json}}</pre>
 
     </ion-item>
   </ion-list>

@@ -21,16 +21,19 @@ export class HomePage {
     private alertCtrl: AlertController,
     private storage: Storage) {
 
-    this.hkqrRoot[0] = "01"
-    this.hkqrRoot[1] = "11";
-    this.hkqrRoot[52] = "0000";
-    this.hkqrRoot[53] = "344";
-    this.hkqrRoot[58] = "HK";
-    this.hkqrRoot[59] = "NA";
-    this.hkqrRoot[60] = "HK";
+    this.hkqrRoot[0] = "01"      //Payload format indicator
+    this.hkqrRoot[1] = "11";    //11=Static, 12=Dynamic qr code
+    this.hkqrRoot[52] = "0000"; //Merchant Category code 
+    this.hkqrRoot[53] = "344";  //Transcation Currency
+    this.hkqrRoot[58] = "HK";   //Country code
+    this.hkqrRoot[59] = "NA";   //Merchant Name
+    this.hkqrRoot[60] = "HK";   //Merchant City
 
-    this.hkqrAccount[0] = "hk.com.hkicl"
-    this.hkqrAccount[1] = "004";
+    this.hkqrAccount[0] = "hk.com.hkicl"  //GUID
+    this.hkqrAccount[1] = "004";          //Clearing Code 040=DSB, 004=HSBC
+    // this.hkqrAccount[2] = "123456"        //FPS identifier
+    // this.hkqrAccount[3] = "+852-98765432"  //mobile
+    // this.hkqrAccount[4] = "hw_wong168@yahoo.com.hk"  //email
     this.hkqrRoot[26] = this.hkqrAccount;
 
 
