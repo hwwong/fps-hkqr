@@ -35,7 +35,7 @@
         <h2>{{hkqrRoot[26][3]}}</h2>
         <p>{{hkqrRoot[26][0]}}</p>
       </ion-item>
-      
+
       <ion-item-options side="right">
         <!-- <button ion-button color="secondary">
           <ion-icon name="eye-off"></ion-icon>
@@ -47,8 +47,15 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
-    
   </ion-list>
+   
+
+  <ion-select [(ngModel)]="selectedBank">
+    <ion-option *ngFor="let bank of banks" value="{{bank[0]}}"> {{bank[1]}}</ion-option>
+  </ion-select>
+
+{{selectedBank}}
+
 
   <ion-footer padding>
     <button ion-button full (click)="openNumInput()">Enter amount</button>

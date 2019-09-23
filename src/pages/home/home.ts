@@ -4,7 +4,7 @@ import { HkqrProvider } from '../../providers/hkqr/hkqr';
 import { AlertController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
-
+import { bankCode } from '../../providers/hkqr/data';
 
 @Component({
   selector: 'page-home',
@@ -14,6 +14,8 @@ export class HomePage {
   hkqrRoot = {};
   hkqrAccount = {};
   QR_value = " ";
+  selectedBank = 40;
+  banks = bankCode;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -30,7 +32,7 @@ export class HomePage {
     this.hkqrRoot[60] = "HK";   //Merchant City
 
     this.hkqrAccount[0] = "hk.com.hkicl"  //GUID
-    this.hkqrAccount[1] = "004";          //Clearing Code 040=DSB, 004=HSBC
+    // this.hkqrAccount[1] = "040";          //Clearing Code 040=DSB, 004=HSBC
     // this.hkqrAccount[2] = "123456"        //FPS identifier
     // this.hkqrAccount[3] = "+852-98765432"  //mobile
     // this.hkqrAccount[4] = "hw_wong168@yahoo.com.hk"  //email
@@ -43,7 +45,7 @@ export class HomePage {
 
     }).catch(err => {
       console.log(err);
-      this.hkqrAccount[3] = "+852-1234678"
+      this.hkqrAccount[3] = "+852-92847043"
       this.QR_value = this.hkqrProvider.genQRvalue(this.hkqrRoot);
     });
 
